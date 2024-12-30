@@ -517,11 +517,11 @@ export const generateWAMessageContent = async(
 	
 	if('buttons' in message && !!message.buttons) {
 		const buttonsMessage: proto.Message.IButtonsMessage = {
-			buttons: message.buttons!.map(b => ({ ...b }))
+			buttons: message.buttons!.map(b => ({ ...b, type: WAProto_1.proto.Message.ButtonsMessage.Button.Type.RESPONSE }))
 		}
 		if('text' in message) {
 			buttonsMessage.contentText = message.text
-			buttonsMessage.headerType = message.hasOwnProperty("headerType") ? message.headerType : ButtonType.EMPTY;
+			buttonsMessage.headerType = ButtonType.EMPTY;
 		} else {
 			if('caption' in message) {
 				buttonsMessage.contentText = message.caption
